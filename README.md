@@ -127,6 +127,61 @@ Make sure:
 
 ---
 
+## Optional: Run as a Service (Auto-Start on Boot)
+
+This will make the custom UI start automatically when your system boots.
+
+### 1. Create a service file
+
+    sudo nano /etc/systemd/system/custom-pool-ui.service
+
+Paste the following:
+
+    [Unit]
+    Description=Custom Public Pool UI
+    After=network.target
+
+    [Service]
+    Type=simple
+    User=YOUR_USERNAME
+    WorkingDirectory=/home/YOUR_USERNAME/custom-public-pool-ui
+    ExecStart=/usr/bin/npm start
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+
+---
+
+### 2. Enable and start the service
+
+    sudo systemctl daemon-reexec
+    sudo systemctl daemon-reload
+    sudo systemctl enable custom-pool-ui
+    sudo systemctl start custom-pool-ui
+
+---
+
+### 3. Check status
+
+    sudo systemctl status custom-pool-ui
+
+---
+
+### Notes
+
+- Replace `YOUR_USERNAME` with your system username
+- Update the `WorkingDirectory` path to match where you cloned the repo
+- Make sure Node.js and npm are installed system-wide
+
+---
+
+### Important
+
+This only starts the UI.
+
+For the UI to display data, your Public Pool backend (port 3334) and Bitcoin node must also be running.
+
 ## 💡 Tip
 
 This is a custom frontend only.  
