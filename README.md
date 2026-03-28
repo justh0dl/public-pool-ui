@@ -1,68 +1,125 @@
-Custom themed version of Public Pool UI
+# Custom themed version of Public Pool UI
 
-Features
-#Quantum Sniper Pool Branding
-#black & gold / white themes
-#more pool stats on splash
-#chart adjusted on worker monitoring
-#LAN-accessible UI
-#systemd service support (not 100% sure if this will set it up as a service on your PC but that was the goal)
-can run alongside the normal public pool UI
+## Features
+- Quantum Sniper Pool Branding
+- Black & gold / white themes
+- More pool stats on splash
+- Chart adjusted on worker monitoring
+- LAN-accessible UI
+- Systemd service support *(not fully tested)*
+- Can run alongside the normal Public Pool UI
+
+---
 
 Does not affect pool/mining in any way whatsoever as it's just a UI.
 
-default URL: http://localhost:4201/#/
+**Default URL:** http://localhost:4201/#/
 
-# PublicPoolUi
+👉 I recommend installing and confirming the original Public Pool UI works on  
+http://localhost:4200 before using this (this was vibe coded with ChatGPT)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
+---
 
-## Dependencies
+## How to Run the Custom Public Pool UI (Local Setup)
 
-Requires [Public-Pool](https://github.com/benjamin-wilson/public-pool) to be running
+### 📋 Requirements
+Before starting, make sure you have:
 
-## Development server
+- Node.js (version 18 or newer recommended)
+- npm (comes with Node)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+### 📦 Step 1: Download the UI
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    git clone https://github.com/justh0dl/public-pool-ui.git
+    cd public-pool-ui
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 📥 Step 2: Install Dependencies
 
-## Running unit tests
+    npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+### ▶️ Step 3: Start the UI
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    npm start
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 🌐 Step 4: Open in Browser
 
-## Deployment
+Go to:
 
-Install pm2 (https://pm2.keymetrics.io/)
+    http://localhost:4201
 
-```bash
-$ pm2 serve --spa dist/public-pool-ui/ 3335 --name ui
-```
+---
 
-## Docker
+## ⚙️ Important Notes
 
-```bash
-$ docker build -t public-pool-ui .
-$ docker run --name public-pool-ui --rm -p 8080:80 public-pool-ui
-```
+### 🔌 Backend Requirement (VERY IMPORTANT)
 
-From Docker commands, website will be accessible on [http://localhost:8080](http://localhost:8080). By default Caddy server listen on port 80, but we bind it to port 8080 which allows you to launch image without root permissions.
+This UI connects to the Public Pool backend API at:
 
-Available variables:
-* `DOMAIN`: website domain (default: `localhost`)
-* `LOGLEVEL`: loglevel in stdout (default: `INFO`)
-* `LOGFORMAT`: log format in stdout (default: `json`)
+    127.0.0.1:3334
+
+👉 You MUST already have the original Public Pool UI running on your machine.
+
+If your original Public Pool UI works, then you're good.
+
+---
+
+### 🔁 Running Both UIs
+
+You can run both at the same time:
+
+- Original UI → http://localhost:4200  
+- Custom UI → http://localhost:4201  
+
+---
+
+### ⚠️ If the UI Shows No Data
+
+Check that:
+
+- Your pool backend is running  
+- Port 3334 is active  
+- Your miner is connected  
+
+---
+
+## 🛠️ Troubleshooting
+
+### ❌ Port already in use
+
+If 4201 is busy:
+
+    ng serve --port 4202
+
+---
+
+### ❌ Node version issues
+
+Check your version:
+
+    node -v
+
+If it's below 18, update Node.js.
+
+---
+
+### ❌ Cannot connect to API
+
+Make sure:
+
+- Public Pool is running  
+- API is accessible at 127.0.0.1:3334  
+
+---
+
+## 💡 Tip
+
+This is a custom frontend only.  
+It does NOT modify your mining backend or pool logic.
