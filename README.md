@@ -19,6 +19,14 @@ Does not affect pool/mining in any way whatsoever as it's just a UI.
 http://localhost:4200 before using this (this was vibe coded with ChatGPT)
 
 ---
+<img width="1903" height="870" alt="Screenshot 2026-03-28 at 1 15 04 PM" src="https://github.com/user-attachments/assets/9318eb80-551d-4c52-93e4-87b024029fbd" />
+<img width="1888" height="807" alt="Screenshot 2026-03-28 at 1 16 53 PM" src="https://github.com/user-attachments/assets/d46b2370-4a0f-489f-82d1-0f48758a1468" />
+<img width="1893" height="279" alt="Screenshot 2026-03-28 at 1 17 25 PM" src="https://github.com/user-attachments/assets/c3c7bcda-b0ff-4cbd-85a4-163a34ca380f" />
+<img width="1897" height="990" alt="Screenshot 2026-03-28 at 1 19 18 PM" src="https://github.com/user-attachments/assets/c19aed07-0c9c-4ded-a47d-0672296a2bd8" />
+<img width="1064" height="718" alt="Screenshot 2026-03-28 at 1 18 37 PM" src="https://github.com/user-attachments/assets/62896176-7f3d-464f-91d7-87253b97cf4e" />
+<img width="865" height="784" alt="Screenshot 2026-03-28 at 1 18 54 PM" src="https://github.com/user-attachments/assets/8526d77f-ed36-4130-8213-29f3f3b9d957" />
+<img width="875" height="645" alt="Screenshot 2026-03-28 at 1 19 04 PM" src="https://github.com/user-attachments/assets/09ab44a1-45ec-4640-b672-d6eecb2676f9" />
+<img width="1885" height="869" alt="Screenshot 2026-03-28 at 1 20 44 PM" src="https://github.com/user-attachments/assets/1b4ff1a8-c830-4dcb-aa6c-158d84aef0c4" />
 
 ## How to Run the Custom Public Pool UI (Local Setup)
 
@@ -65,9 +73,9 @@ This UI connects to the Public Pool backend API at:
 
     127.0.0.1:3334
 
-👉 You MUST already have the original Public Pool UI running on your machine.
+👉 You MUST already have the original Public Pool Backend running on your machine. I strongly reccomend installing the original public pool UI.
 
-If your original Public Pool UI works, then you're good.
+If your original Public Pool UI works, then this should also work.
 
 ---
 
