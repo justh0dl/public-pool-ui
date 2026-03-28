@@ -1,3 +1,18 @@
+Custom themed version of Public Pool UI
+
+features
+Quantum Sniper Pool Branding
+black & gold / white themes
+more pool stats on splash
+chart adjusted on worker monitoring
+LAN-accessible UI
+systemd service support
+can run alongside the normal public pool UI
+
+Does not affect pool/mining in any way whatsoever as it's just a UI.
+
+default URL: http://localhost:4201/#/
+
 # PublicPoolUi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
