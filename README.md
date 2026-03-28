@@ -1,12 +1,12 @@
 Custom themed version of Public Pool UI
 
-features
-Quantum Sniper Pool Branding
-black & gold / white themes
-more pool stats on splash
-chart adjusted on worker monitoring
-LAN-accessible UI
-systemd service support
+Features
+#Quantum Sniper Pool Branding
+#black & gold / white themes
+#more pool stats on splash
+#chart adjusted on worker monitoring
+#LAN-accessible UI
+#systemd service support (not 100% sure if this will set it up as a service on your PC but that was the goal)
 can run alongside the normal public pool UI
 
 Does not affect pool/mining in any way whatsoever as it's just a UI.
