@@ -1,21 +1,19 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
-import { combineLatest, map, Observable, shareReplay } from 'rxjs';
+import { combineLatest, map, Observable, shareReplay, startWith, Subject } from 'rxjs';
 
 import { HashSuffixPipe } from '../../pipes/hash-suffix.pipe';
 import { AppService } from '../../services/app.service';
 import { ClientService } from '../../services/client.service';
 import { AverageTimeToBlockPipe } from 'src/app/pipes/average-time-to-block.pipe';
 
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public address: string;
 
@@ -25,13 +23,18 @@ export class DashboardComponent implements AfterViewInit {
   public chartOptions: any;
 
   public networkInfo$: Observable<any>;
-  private networkInfo:any;
+  private networkInfo: any;
 
   @ViewChild('dataTable') dataTable!: Table;
 
   public expandedRows$: Observable<any>;
 
+  private readonly themeRefresh$ = new Subject<void>();
 
+  private readonly dashboardThemeChangedHandler = () => {
+    this.buildChartOptions();
+    this.themeRefresh$.next();
+  };
 
   constructor(
     private clientService: ClientService,
@@ -49,23 +52,20 @@ export class DashboardComponent implements AfterViewInit {
     );
 
     this.expandedRows$ = this.clientInfo$.pipe(map((info: any) => {
-
       return info.workers.reduce((pre: any, cur: any) => { pre[cur.name] = true; return pre; }, {});
-
     }));
 
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-
-    this.chartData$ = combineLatest([this.clientService.getClientInfoChart(this.address),  this.networkInfo$]).pipe(
+    this.chartData$ = combineLatest([
+      this.clientService.getClientInfoChart(this.address),
+      this.networkInfo$,
+      this.themeRefresh$.pipe(startWith(undefined))
+    ]).pipe(
       map(([chartData, networkInfo]) => {
 
         this.networkInfo = networkInfo;
-        const GROUP_SIZE = 12; //6 = 1 hour
-
+        const theme = this.getSavedTheme();
+        const documentStyle = getComputedStyle(document.documentElement);
+        const GROUP_SIZE = 12;
 
         let hourlyData = [];
 
@@ -78,7 +78,6 @@ export class DashboardComponent implements AfterViewInit {
           hourlyData.push({ y: sum, x: chartData[i].label });
         }
 
-
         const data = chartData.map((d: any) => { return { y: d.data, x: d.label } });
 
         return {
@@ -89,8 +88,8 @@ export class DashboardComponent implements AfterViewInit {
               label: '2 Hour',
               data: hourlyData,
               fill: false,
-              backgroundColor: documentStyle.getPropertyValue('--yellow-600'),
-              borderColor: documentStyle.getPropertyValue('--yellow-600'),
+              backgroundColor: theme === 'white' ? '#666666' : documentStyle.getPropertyValue('--yellow-600'),
+              borderColor: theme === 'white' ? '#666666' : documentStyle.getPropertyValue('--yellow-600'),
               tension: .4,
               pointRadius: 1,
               borderWidth: 1
@@ -100,19 +99,86 @@ export class DashboardComponent implements AfterViewInit {
               label: '10 Minute',
               data: data,
               fill: false,
-              backgroundColor: documentStyle.getPropertyValue('--primary-color'),
-              borderColor: documentStyle.getPropertyValue('--primary-color'),
+              backgroundColor: theme === 'white' ? '#111111' : documentStyle.getPropertyValue('--primary-color'),
+              borderColor: theme === 'white' ? '#111111' : '#118385',
               tension: .4,
               pointRadius: 1,
               borderWidth: 1
             },
-
           ]
-        }
+        };
       })
     );
 
+    this.buildChartOptions();
+  }
 
+  ngOnInit(): void {
+    window.addEventListener('themeChanged', this.dashboardThemeChangedHandler);
+  }
+
+  ngAfterViewInit() {
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('themeChanged', this.dashboardThemeChangedHandler);
+  }
+
+  private getSavedTheme(): 'gold' | 'white' {
+    const savedTheme = localStorage.getItem('public-pool-theme');
+    return savedTheme === 'white' ? 'white' : 'gold';
+  }
+
+  private buildChartOptions(): void {
+    const theme = this.getSavedTheme();
+
+    if (theme === 'white') {
+      this.chartOptions = {
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#111111'
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'hour',
+            },
+            ticks: {
+              color: '#555555'
+            },
+            grid: {
+              color: '#d8d8d8',
+              drawBorder: false,
+              display: true
+            }
+          },
+          y: {
+            ticks: {
+              color: '#555555',
+              callback: (value: number) => {
+                return HashSuffixPipe.transform(value) + ' - ' + AverageTimeToBlockPipe.transform(value, this.networkInfo?.difficulty);
+              }
+            },
+            grid: {
+              color: '#d8d8d8',
+              drawBorder: false
+            }
+          }
+        }
+      };
+
+      return;
+    }
+
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.chartOptions = {
       maintainAspectRatio: false,
@@ -127,7 +193,7 @@ export class DashboardComponent implements AfterViewInit {
         x: {
           type: 'time',
           time: {
-            unit: 'hour', // Set the unit to 'minute'
+            unit: 'hour',
           },
           ticks: {
             color: textColorSecondary
@@ -142,7 +208,7 @@ export class DashboardComponent implements AfterViewInit {
           ticks: {
             color: textColorSecondary,
             callback: (value: number) => {
-              return HashSuffixPipe.transform(value) + " - " + AverageTimeToBlockPipe.transform(value, this.networkInfo.difficulty);
+              return HashSuffixPipe.transform(value) + ' - ' + AverageTimeToBlockPipe.transform(value, this.networkInfo?.difficulty);
             }
           },
           grid: {
@@ -152,13 +218,6 @@ export class DashboardComponent implements AfterViewInit {
         }
       }
     };
-
-  }
-
-
-
-  ngAfterViewInit() {
-
   }
 
   public getSessionCount(name: string, workers: any[]) {
@@ -168,7 +227,7 @@ export class DashboardComponent implements AfterViewInit {
 
   public getTotalHashRate(name: string, workers: any[]) {
     const workersByName = workers.filter(w => w.name == name);
-    const sum = workersByName.reduce((pre, cur, idx, arr) => {
+    const sum = workersByName.reduce((pre, cur) => {
       return pre += Math.floor(cur.hashRate);
     }, 0);
     return Math.floor(sum);
@@ -176,7 +235,7 @@ export class DashboardComponent implements AfterViewInit {
 
   public getBestDifficulty(name: string, workers: any[]) {
     const workersByName = workers.filter(w => w.name == name);
-    const best = workersByName.reduce((pre, cur, idx, arr) => {
+    const best = workersByName.reduce((pre, cur) => {
       if (cur.bestDifficulty > pre) {
         return cur.bestDifficulty;
       }
@@ -189,7 +248,7 @@ export class DashboardComponent implements AfterViewInit {
   public getTotalUptime(name: string, workers: any[]) {
     const now = new Date().getTime();
     const workersByName = workers.filter(w => w.name == name);
-    const sum = workersByName.reduce((pre, cur, idx, arr) => {
+    const sum = workersByName.reduce((pre, cur) => {
       return pre += now - new Date(cur.startTime).getTime();
     }, 0);
     return new Date(now - sum);

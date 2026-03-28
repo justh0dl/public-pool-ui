@@ -3,22 +3,539 @@
 @import "../node_modules/primeicons/primeicons.css";
 @import "../node_modules/primeflex/primeflex.css";
 
-.p-datatable .p-datatable-thead>tr>th {
-    background: none;
+/* =========================
+   THEME VARIABLES
+   ========================= */
+
+:root {
+  --app-bg: #000000;
+  --app-text: #ffffff;
+  --app-muted-text: #aaaaaa;
+
+  --surface-card: transparent !important;
+  --surface-ground: #000000 !important;
+  --surface-section: #000000 !important;
+
+  --surface-border: #c3a800 !important;
+  --surface-border-color: #c3a800 !important;
+
+  --primary-color: #c3a800 !important;
+  --primary-color-text: #000000 !important;
+
+  --sidebar-bg: #222222;
+  --input-bg: #222222;
+  --input-text: #ffffff;
+  --input-border: #575757;
+
+  --button-bg: #222222;
+  --button-hover-bg: #2e2e2e;
+  --button-text: #ffffff;
+
+  --datatable-row-odd: #1a1a1a;
+  --datatable-row-even: #202020;
+  --datatable-row-hover: #2a2a2a;
+  --datatable-border: #575757;
+
+  --workers-header-border: rgba(255, 255, 255, 0.15);
+  --workers-row-border: rgba(255, 255, 255, 0.12);
+  --workers-row-hover: rgba(255, 255, 255, 0.04);
+
+  --theme-switcher-bg: rgba(255, 255, 255, 0.04);
+  --theme-switcher-border: rgba(255, 255, 255, 0.12);
+  --theme-switcher-button-bg: #1c1c1c;
+  --theme-switcher-button-text: #ffffff;
+  --theme-switcher-button-border: #575757;
+  --theme-switcher-button-active-bg: #c3a800;
+  --theme-switcher-button-active-text: #000000;
+
+  --chart-text-color: var(--text-color, #ffffff);
+  --chart-text-color-secondary: var(--text-color-secondary, #d1d5db);
+  --chart-surface-border: var(--surface-border, #c3a800);
 }
 
-.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody>tr:not(.p-highlight) {
-    cursor: pointer;
+/* =========================
+   GOLD THEME
+   ========================= */
+
+body.theme-gold {
+  --app-bg: #000000;
+  --app-text: #ffffff;
+  --app-muted-text: #aaaaaa;
+
+  --surface-card: transparent !important;
+  --surface-ground: #000000 !important;
+  --surface-section: #000000 !important;
+
+  --surface-border: #c3a800 !important;
+  --surface-border-color: #c3a800 !important;
+
+  --primary-color: #c3a800 !important;
+  --primary-color-text: #000000 !important;
+
+  --sidebar-bg: #222222;
+  --input-bg: #222222;
+  --input-text: #ffffff;
+  --input-border: #575757;
+
+  --button-bg: #222222;
+  --button-hover-bg: #2e2e2e;
+  --button-text: #ffffff;
+
+  --datatable-row-odd: #1a1a1a;
+  --datatable-row-even: #202020;
+  --datatable-row-hover: #2a2a2a;
+  --datatable-border: #575757;
+
+  --workers-header-border: rgba(255, 255, 255, 0.15);
+  --workers-row-border: rgba(255, 255, 255, 0.12);
+  --workers-row-hover: rgba(255, 255, 255, 0.04);
+
+  --theme-switcher-bg: rgba(255, 255, 255, 0.04);
+  --theme-switcher-border: rgba(255, 255, 255, 0.12);
+  --theme-switcher-button-bg: #1c1c1c;
+  --theme-switcher-button-text: #ffffff;
+  --theme-switcher-button-border: #575757;
+  --theme-switcher-button-active-bg: #c3a800;
+  --theme-switcher-button-active-text: #000000;
+
+  --chart-text-color: var(--text-color, #ffffff);
+  --chart-text-color-secondary: var(--text-color-secondary, #d1d5db);
+  --chart-surface-border: var(--surface-border, #c3a800);
 }
 
+/* =========================
+   WHITE THEME
+   ========================= */
 
-p-chart>div {
-    position: relative;
-    min-height: 40vh;
+body.theme-white {
+  --app-bg: #f5f5f5;
+  --app-text: #111111;
+  --app-muted-text: #555555;
+
+  --surface-card: #transparent !important;
+  --surface-ground: #f5f5f5 !important;
+  --surface-section: #f5f5f5 !important;
+
+  --surface-border: #d8d8d8 !important;
+  --surface-border-color: #d8d8d8 !important;
+
+  --primary-color: #111111 !important;
+  --primary-color-text: #ffffff !important;
+
+  --sidebar-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-text: #111111;
+  --input-border: #cccccc;
+
+  --button-bg: #111111;
+  --button-hover-bg: #333333;
+  --button-text: #ffffff;
+
+  --datatable-row-odd: #ffffff;
+  --datatable-row-even: #f0f0f0;
+  --datatable-row-hover: #e6e6e6;
+  --datatable-border: rgba(0, 0, 0, 0.12);
+
+  --workers-header-border: rgba(0, 0, 0, 0.15);
+  --workers-row-border: rgba(0, 0, 0, 0.12);
+  --workers-row-hover: rgba(0, 0, 0, 0.04);
+
+  --theme-switcher-bg: rgba(0, 0, 0, 0.03);
+  --theme-switcher-border: rgba(0, 0, 0, 0.10);
+  --theme-switcher-button-bg: #ffffff;
+  --theme-switcher-button-text: #111111;
+  --theme-switcher-button-border: #cccccc;
+  --theme-switcher-button-active-bg: #111111;
+  --theme-switcher-button-active-text: #ffffff;
+
+  --chart-text-color: #111111;
+  --chart-text-color-secondary: #555555;
+  --chart-surface-border: #d8d8d8;
+}
+
+body {
+  background-color: var(--app-bg) !important;
+  color: var(--app-text) !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: none;
+}
+
+.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight) {
+  cursor: pointer;
+}
+
+p-chart > div {
+  position: relative;
+  min-height: 40vh;
 }
 
 .card {
-    &.chart {
-        padding: 10px;
-    }
+  &.chart {
+    padding: 10px;
+  }
 }
+
+/* ----- charcoal / theme table rows ----- */
+
+.p-datatable .p-datatable-tbody > tr {
+  background-color: var(--datatable-row-odd) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background-color: var(--datatable-row-even) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background-color: var(--datatable-row-hover) !important;
+}
+
+.layout-sidebar {
+  background-color: var(--sidebar-bg) !important;
+}
+
+/* ---------- LOGIN FIELD ---------- */
+
+.p-inputtext {
+  background-color: var(--input-bg) !important;
+  color: var(--input-text) !important;
+  border: 1px solid var(--input-border) !important;
+}
+
+.p-inputtext::placeholder {
+  color: var(--app-muted-text) !important;
+}
+
+.p-inputtext:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 1px var(--primary-color) !important;
+  outline: none !important;
+}
+
+/* ---------- BUTTON ---------- */
+
+.p-button {
+  background-color: var(--button-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  color: var(--button-text) !important;
+}
+
+.p-button:hover {
+  background-color: var(--button-hover-bg) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* ---------- TABLE BORDERS ---------- */
+
+.p-datatable .p-datatable-tbody > tr > td {
+  border-color: var(--datatable-border) !important;
+}
+
+/* ---------- REMOVE PRIME BLUE TINT ---------- */
+
+.p-highlight {
+  background-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+}
+
+.p-component:focus {
+  box-shadow: none !important;
+}
+
+.p-link:focus {
+  box-shadow: none !important;
+}
+
+/* ===== THEME CUSTOMIZER ===== */
+
+.theme-customizer-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--theme-switcher-bg);
+  border: 1px solid var(--theme-switcher-border);
+  border-radius: 12px;
+}
+
+.theme-customizer-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--app-text);
+  margin-bottom: 0.75rem;
+}
+
+.theme-switcher-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.theme-switcher-button {
+  appearance: none;
+  border: 1px solid var(--theme-switcher-button-border);
+  background: var(--theme-switcher-button-bg);
+  color: var(--theme-switcher-button-text) !important;
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-switcher-button:hover {
+  border-color: var(--primary-color);
+}
+
+.theme-switcher-button.active {
+  background: var(--theme-switcher-button-active-bg);
+  color: var(--theme-switcher-button-active-text) !important;
+  border-color: var(--primary-color);
+}
+
+/* ===== WORKERS TABLE (KEEP EXISTING GOLD LOOK) ===== */
+
+.workers-card {
+  overflow: hidden;
+}
+
+.workers-table-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.workers-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+/* HEADER */
+.workers-table thead th {
+  padding: 10px 6px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--workers-header-border);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* CELLS */
+.workers-table tbody td {
+  padding: 12px 6px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--workers-row-border);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ROW CLICK */
+.workers-table tbody tr {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+/* HOVER EFFECT */
+.workers-table tbody tr:hover {
+  background: var(--workers-row-hover);
+}
+
+/* TEXT WRAPPING FIX */
+.worker-cell-text {
+  display: block;
+  min-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* COLUMN WIDTHS */
+.workers-table .col-name {
+  width: 26%;
+}
+
+.workers-table .col-hashrate {
+  width: 18%;
+}
+
+.workers-table .col-uptime {
+  width: 18%;
+}
+
+.workers-table .col-lastseen {
+  width: 18%;
+}
+
+.workers-table .col-bestdiff {
+  width: 20%;
+}
+
+/* ===== MOBILE TIGHTENING ===== */
+
+@media (max-width: 768px) {
+  .workers-table {
+    font-size: 11px;
+  }
+
+  .workers-table thead th,
+  .workers-table tbody td {
+    padding: 6px 4px;
+  }
+
+  .workers-table thead th {
+    font-size: 10px;
+  }
+
+  .workers-table tbody td {
+    font-size: 10px;
+  }
+
+  .theme-switcher-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .workers-table {
+    font-size: 10px;
+  }
+
+  .workers-table thead th,
+  .workers-table tbody td {
+    padding: 5px 3px;
+  }
+
+  .workers-table thead th {
+    font-size: 9px;
+  }
+
+  .workers-table tbody td {
+    font-size: 9px;
+  }
+}
+
+/* ===== IMPORTANT: KILL ANY HORIZONTAL SCROLL ===== */
+
+.p-table,
+.p-datatable,
+.table,
+.table-wrapper {
+  overflow-x: hidden !important;
+}
+
+table {
+  min-width: 0 !important;
+}
+
+/* ===== WHITE THEME TEXT FIXES ===== */
+
+body.theme-white,
+body.theme-white .layout-wrapper,
+body.theme-white .layout-main-container {
+  color: #111111 !important;
+}
+
+body.theme-white .card,
+body.theme-white .card * {
+  color: #111111 !important;
+}
+
+body.theme-white h1,
+body.theme-white h2,
+body.theme-white h3,
+body.theme-white h4,
+body.theme-white h5,
+body.theme-white h6,
+body.theme-white span,
+body.theme-white div,
+body.theme-white label,
+body.theme-white code,
+body.theme-white th,
+body.theme-white td {
+  color: #111111 !important;
+}
+
+body.theme-white .text-500,
+body.theme-white .text-900 {
+  color: #111111 !important;
+}
+
+body.theme-white .layout-sidebar {
+  color: #111111 !important;
+}
+
+body.theme-white .layout-sidebar * {
+  color: #111111 !important;
+}
+
+body.theme-white .p-inputtext {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #cccccc !important;
+}
+
+body.theme-white .p-button {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid #111111 !important;
+}
+
+body.theme-white .p-button .p-button-label {
+  color: #ffffff !important;
+}
+
+body.theme-white .p-button:disabled,
+body.theme-white .p-button.p-disabled {
+  background-color: #b5b5b5 !important;
+  border-color: #b5b5b5 !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.theme-white .p-button:disabled .p-button-label,
+body.theme-white .p-button.p-disabled .p-button-label {
+  color: #ffffff !important;
+}
+
+body.theme-white .p-button:hover {
+  background-color: #333333 !important;
+  border-color: #333333 !important;
+}
+
+body.theme-white .theme-switcher-button {
+  color: #111111 !important;
+}
+
+body.theme-white .theme-switcher-button.active {
+  color: #ffffff !important;
+}
+
+/* ===== PARTICLE THEME SWITCHING ===== */
+
+app-background-particles-white {
+  display: none;
+}
+
+body.theme-white app-background-particles {
+  display: none;
+}
+
+body.theme-white app-background-particles-white {
+  display: block;
+}
+
+body.theme-gold app-background-particles {
+  display: block;
+}
+
+body.theme-gold app-background-particles-white {
+  display: none;
+}
+

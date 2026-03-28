@@ -5,14 +5,13 @@ import { loadFull } from 'tsparticles';
 import { Container, Engine } from 'tsparticles-engine';
 
 @Component({
-  selector: 'app-background-particles',
-  templateUrl: './background-particles.component.html',
-  styleUrls: ['./background-particles.component.scss']
+  selector: 'app-background-particles-white',
+  templateUrl: './background-particles-white.component.html',
+  styleUrls: ['./background-particles-white.component.scss']
 })
-export class BackgroundParticlesComponent implements OnInit {
+export class BackgroundParticlesWhiteComponent implements OnInit {
   public particleStyles!: any;
   public particleOptions!: IParticlesProps;
-
 
   constructor(private deviceService: DeviceDetectorService) { }
 
@@ -28,23 +27,23 @@ export class BackgroundParticlesComponent implements OnInit {
       bottom: 0,
     };
 
-    const color: string = '#a68f00';
-    const lineColor: string = '#118385';
+    const color: string = '#111111';
+    const lineColor: string = '#444444';
 
     this.particleOptions = {
       fpsLimit: 30,
       detectRetina: true,
       background: {
-        position: "50% 50%",
-        repeat: "no-repeat",
-        size: "cover"
+        position: '50% 50%',
+        repeat: 'no-repeat',
+        size: 'cover'
       },
       fullScreen: {
         zIndex: 1
       },
       particles: {
         number: {
-          value: 80,
+          value: this.deviceService.isMobile() ? 40 : 80,
           density: {
             enable: true,
             value_area: 800
@@ -53,14 +52,14 @@ export class BackgroundParticlesComponent implements OnInit {
         color: {
           value: color
         },
-        opacity: { value: 0.6 },
+        opacity: { value: 0.26 },
         links: {
           distance: 150,
           enable: true,
           color: {
             value: lineColor
           },
-          opacity: 0.6
+          opacity: 0.26
         },
         move: {
           enable: true,
@@ -68,22 +67,14 @@ export class BackgroundParticlesComponent implements OnInit {
         },
         size: {
           random: true,
-
         }
       }
-    }
+    };
   }
 
-  particlesLoaded(container: Container): void {
-
-  }
+  particlesLoaded(container: Container): void {}
 
   async particlesInit(engine: Engine): Promise<void> {
-
-
-    // Starting from 1.19.0 you can add custom presets or shape here, using the current tsParticles instance (main)
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(engine);
   }
 }

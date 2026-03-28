@@ -1,239 +1,315 @@
 <div class="py-4 px-1 md:px4 lg:px-8 mx-0 lg:mx-8 main">
-    <div class="grid justify-content-center">
+  <div class="grid justify-content-center">
 
-        <div class="col-12">
+    <div class="col-12">
 
-            <div class="card text-center">
+      <div class="card text-center">
 
-                <div>
-                    <img id="logo" style="height: 200px;" src="assets/layout/images/logo.svg" alt="logo">
-
-                </div>
-
-                <div class="col-12 text-center title">
-                    <h1 class="text-900 font-normal">Public Pool</h1>
-                </div>
-                <div class="mb-4">
-                    <a class="ml-4 mr-4" href="https://twitter.com/Public_Pool_BTC" target="_blank">
-                        <i class="pi pi-twitter" style="font-size: 30pt; color: white;"></i>
-                    </a>
-                    <a class="ml-4 mr-4" href="https://discord.gg/pF9smpe3yE" target="_blank">
-                        <i class="pi pi-discord" style="font-size: 30pt; color: white;"></i>
-                    </a>
-                    <a class="ml-4 mr-4" href="https://github.com/benjamin-wilson/public-pool" target="_blank">
-                        <i class="pi pi-github" style="font-size: 30pt; color: white;"></i>
-                    </a>
-
-                </div>
-
-                <div>
-                    <code>Fully Open Source Solo Bitcoin Mining Pool</code>
-                    <br>
-                    <br>
-                    <div class="info mb-2 p-4 border-dashed border-1 border-round">
-                        <code>stratum+tcp://{{stratumURL}}</code>
-                        <br>
-                        <code>username: &lt;your BTC address&gt;.&lt;worker name&gt;, password: x</code>
-                    </div>
-                    <span><b>NO FEES</b></span>
-                    <br>
-                    <span>No second best.</span>
-                </div>
-
-
-
-
-            </div>
+        <div>
+          <img
+            id="logo"
+            style="height: 200px;"
+            [src]="currentTheme === 'white'
+              ? 'assets/layout/images/qs-sniper-logo-white.png'
+              : 'assets/layout/images/logo.png'"
+            alt="logo">
         </div>
 
-        <div class="col-12">
-            <div class="card">
-                <h4>Login</h4>
-                <div class="field text-center">
-
-                    <input [formControl]="address" placeholder="Address (bc1...)" pInputText id="address" type="text"
-                        class="p-inputtext p-component p-element">
-                    <button [disabled]="address.invalid" class="ml-3 mt-3" pButton label="My Workers"
-                        [routerLink]="['app',address.value]"></button>
-                </div>
-            </div>
+        <div class="col-12 text-center title">
+          <h1 class="text-900 font-normal">Quantum Sniper Pool</h1>
         </div>
 
-        <div class="col-12">
-            <div class="card chart">
+        <div>
+          <code>The Only Quantum Sniping Solo Bitcoin Mining Pool</code>
+          <br>
+          <br>
 
-                <div class="text-center mb-2">Uptime: {{uptime$ | async | dateAgo}}</div>
+          <div class="info mb-2 p-4 border-dashed border-1 border-round">
+            <code>username: &lt;your BTC address&gt;.&lt;worker name&gt;, password: x</code>
+          </div>
 
-                <ng-container *ngIf="chartData$ | async as chartData; else loadingChart">
-                    
-                    <p-chart [responsive]="true" type="line" [data]="chartData" [options]="chartOptions"></p-chart>
-
-                </ng-container>
-                <ng-template #loadingChart>
-                    <p-skeleton width="100%" height="40vh"></p-skeleton>
-                </ng-template>
-            </div>
+          <span><b>THE PLEBS</b></span>
+          <br>
+          <span>Won't stop staring.</span>
         </div>
 
-
-        <div class="col-12">
-            <div class="card">
-                <h4 style="text-align: center;">Online Devices</h4>
-                <ng-container *ngIf="userAgents$ | async as userAgents">
-                    <p-table [value]="userAgents">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Device</th>
-                                <th>Currently Working</th>
-                                <th>Total Hash Rate</th>
-                                <th>Best Difficulty <i class="pi pi-question-circle ml-2"
-                                        pTooltip="If you find a solution with a difficulty higher than the network difficulty, you've found a block."></i>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-userAgent>
-                            <tr></tr>
-                            <tr>
-                                <td><app-user-agent-link [userAgent]="userAgent.userAgent"></app-user-agent-link></td>
-                                <td>{{ userAgent.count }}</td>
-                                <td>{{ userAgent.totalHashRate | hashSuffix }}</td>
-                                <td>{{ userAgent.bestDifficulty | numberSuffix}}</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                    <div class="text-right mt-2">
-                        <i class="pi pi-star-fill"></i> = Open Source Software & Hardware
-                    </div>
-                </ng-container>
-                <ng-template #loadingTable>
-                    <p-table [value]="[{},{},{}]">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Device</th>
-                                <th>Currently Working</th>
-                                <th>Total Hash Rate</th>
-                                <th>Best Difficulty <i class="pi pi-question-circle ml-2"
-                                        pTooltip="If you find a solution with a difficulty higher than the network difficulty, you've found a block."></i>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-row>
-                            <tr></tr>
-                            <tr>
-                                <td><p-skeleton></p-skeleton></td>
-                                <td><p-skeleton></p-skeleton></td>
-                                <td><p-skeleton></p-skeleton></td>
-                                <td><p-skeleton></p-skeleton></td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </ng-template>
-            </div>
-        </div>
-
-
-        <div class="col-12" *ngIf="highScores$ | async as highScores">
-            <div class="card">
-                <h4 style="text-align: center;">High Scores</h4>
-                <ng-container>
-                    <p-table [value]="highScores">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Rank</th>
-                                <th>Difficulty</th>
-                                <th>Device</th>
-                                <th>When</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-highScore let-i="rowIndex">
-                            <tr></tr>
-                            <tr>
-                                <td>#{{i+1}}</td>
-                                <td>{{ highScore.bestDifficulty | numberSuffix }}</td>
-                                <td><app-user-agent-link
-                                        [userAgent]="highScore.bestDifficultyUserAgent ? highScore.bestDifficultyUserAgent : 'unknown'"></app-user-agent-link>
-                                </td>
-                                <td>{{ highScore.updatedAt | dateAgo}} ago</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                    <div class="text-right mt-2">
-                        <i class="pi pi-star-fill"></i> = Open Source Software & Hardware
-                    </div>
-                </ng-container>
-                <ng-template #loadingTable>
-                    <p-table [value]="[{},{},{}]">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Device</th>
-                                <th>Currently Working</th>
-                                <th>Total Hash Rate</th>
-                                <th>Best Difficulty <i class="pi pi-question-circle ml-2"
-                                        pTooltip="If you find a solution with a difficulty higher than the network difficulty, you've found a block."></i>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-row>
-                            <tr></tr>
-                            <tr>
-                                <td><p-skeleton></p-skeleton></td>
-                                <td><p-skeleton></p-skeleton></td>
-                                <td><p-skeleton></p-skeleton></td>
-                                <td><p-skeleton></p-skeleton></td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </ng-template>
-            </div>
-        </div>
-
-
-
-
-        <div class="col-12" *ngIf="blockData$ | async as blockData">
-            <div class="card">
-                <h4 style="text-align: center;"> Found Blocks</h4>
-                <p-table [value]="blockData">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Height</th>
-                            <th>Address</th>
-                            <th>Worker</th>
-                            <th>Session</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-block>
-                        <tr>
-                            <td>{{ block.height }}</td>
-                            <td>{{ block.minerAddress }}</td>
-                            <td>{{ block.worker }}</td>
-                            <td>{{ block.sessionId }}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="card">
-                <div class="grid">
-                    <div class="col-12 md:col-2">
-                        <h3>Donate</h3>
-                        <p>Like the project? Consider a donation. </p>
-                    </div>
-                    <div class="col-12 md:col-4 text-center">
-                        <img style="height: 200px;" src="assets/layout/images/qr-code-ln.svg"
-                            alt="bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d">
-                        <div>public_pool&#64;strike.me</div>
-                    </div>
-                    <div class="col-12 md:col-6 text-center">
-                        <img style="height: 200px;" src="assets/layout/images/qr-code-onchain.svg"
-                            alt="bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d">
-                        <div>bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <!-- POOL HASHRATE -->
+
+    <div class="col-12">
+      <div class="card">
+        <h4 style="text-align:center;">Pool Hashrate</h4>
+
+        <div class="text-center" style="font-size:22px;">
+          {{ poolHashrate }}
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NEW HOME PAGE STATS -->
+
+    <div class="col-12" *ngIf="homeStats$ | async as stats" style="max-width: 1050px; margin: 0 auto;">
+      <div class="grid">
+
+        <div class="col-12 md:col-6 xl:col-3">
+          <div class="card">
+            <div style="font-size: 0.95rem; opacity: 0.85;">Pool Best Difficulty</div>
+            <div style="font-size: 1.7rem; margin-top: 0.75rem;">
+              {{ stats.bestDifficulty | numberSuffix }}
+            </div>
+            <div style="color: #36d66b; margin-top: 0.75rem;" *ngIf="stats.bestDifficultyExact">
+              {{ stats.bestDifficultyExact }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-6 xl:col-3">
+          <div class="card">
+            <div style="font-size: 0.95rem; opacity: 0.85;">Network Difficulty</div>
+            <div style="font-size: 1.7rem; margin-top: 0.75rem;">
+              {{ stats.networkDifficulty | numberSuffix }}
+            </div>
+            <div style="color: #36d66b; margin-top: 0.75rem;" *ngIf="stats.networkDifficultyExact">
+              {{ stats.networkDifficultyExact }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-6 xl:col-3">
+          <div class="card">
+            <div style="font-size: 0.95rem; opacity: 0.85;">Network Hash Rate</div>
+            <div style="font-size: 1.7rem; margin-top: 0.75rem;">
+              {{ stats.networkHashRate | hashSuffix }}
+            </div>
+            <div style="color: #36d66b; margin-top: 0.75rem;" *ngIf="stats.networkHashRateExact">
+              {{ stats.networkHashRateExact }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-6 xl:col-3">
+          <div class="card">
+            <div style="font-size: 0.95rem; opacity: 0.85;">Block Height</div>
+            <div style="font-size: 1.7rem; margin-top: 0.75rem;">
+              {{ stats.blockHeight }}
+            </div>
+            <div style="color: #36d66b; margin-top: 0.75rem; min-height: 1.2rem;">
+              <span *ngIf="stats.weightExact; else emptyWeight">Weight: {{ stats.weightExact }}</span>
+                <ng-template #emptyWeight>&nbsp;</ng-template>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GRAPH -->
+
+    <div class="col-12">
+      <div class="card chart">
+
+        <div class="text-center mb-2">
+          Uptime: {{uptime$ | async | dateAgo}}
+        </div>
+
+        <ng-container *ngIf="chartData$ | async as chartData; else loadingChart">
+
+          <p-chart
+            [responsive]="true"
+            type="line"
+            [data]="chartData"
+            [options]="chartOptions">
+          </p-chart>
+
+        </ng-container>
+
+        <ng-template #loadingChart>
+          <p-skeleton width="100%" height="40vh"></p-skeleton>
+        </ng-template>
+
+      </div>
+    </div>
+
+    <!-- ONLINE DEVICES -->
+
+    <div class="col-12">
+      <div class="card">
+
+        <h4 style="text-align:center;">Online Devices</h4>
+
+        <ng-container *ngIf="userAgents$ | async as userAgents">
+
+          <p-table [value]="userAgents">
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Device</th>
+                <th>Currently Working</th>
+                <th>Total Hash Rate</th>
+                <th>Best Difficulty</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-userAgent>
+
+              <tr>
+                <td>
+                  <app-user-agent-link
+                    [userAgent]="userAgent.userAgent">
+                  </app-user-agent-link>
+                </td>
+
+                <td>
+                  {{ userAgent.count }}
+                </td>
+
+                <td>
+                  {{ userAgent.totalHashRate | hashSuffix }}
+                </td>
+
+                <td>
+                  {{ userAgent.bestDifficulty | numberSuffix}}
+                </td>
+
+              </tr>
+
+            </ng-template>
+
+          </p-table>
+
+        </ng-container>
+
+      </div>
+    </div>
+
+    <!-- HIGH SCORES -->
+
+    <div class="col-12" *ngIf="highScores$ | async as highScores">
+
+      <div class="card">
+
+        <h4 style="text-align:center;">High Scores</h4>
+
+        <p-table [value]="highScores">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Rank</th>
+              <th>Difficulty</th>
+              <th>Device</th>
+              <th>When</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-highScore let-i="rowIndex">
+
+            <tr>
+              <td>#{{i+1}}</td>
+
+              <td>
+                {{ highScore.bestDifficulty | numberSuffix }}
+              </td>
+
+              <td>
+                <app-user-agent-link
+                  [userAgent]="highScore.bestDifficultyUserAgent ? highScore.bestDifficultyUserAgent : 'unknown'">
+                </app-user-agent-link>
+              </td>
+
+              <td>
+                {{ highScore.updatedAt | dateAgo }} ago
+              </td>
+
+            </tr>
+
+          </ng-template>
+
+        </p-table>
+
+      </div>
+
+    </div>
+
+    <!-- LOGIN MOVED TO BOTTOM -->
+
+    <div class="col-12">
+      <div class="card">
+
+        <h4>Login</h4>
+
+        <div class="field text-center">
+
+          <input
+            [formControl]="address"
+            placeholder="Address (bc1...)"
+            pInputText
+            id="address"
+            type="text"
+            class="p-inputtext p-component p-element">
+
+          <button
+            [disabled]="address.invalid"
+            class="ml-3 mt-3"
+            pButton
+            label="My Workers"
+            [routerLink]="['app', address.value]">
+          </button>
+
+        </div>
+
+        <!-- THEME + PARTICLES -->
+
+        <div class="theme-customizer-card">
+
+          <div class="theme-customizer-title">Theme</div>
+
+          <div class="theme-switcher-buttons">
+            <button
+              type="button"
+              class="theme-switcher-button"
+              [ngClass]="{ active: currentTheme === 'gold' }"
+              (click)="setTheme('gold')">
+              Gold
+            </button>
+
+            <button
+              type="button"
+              class="theme-switcher-button"
+              [ngClass]="{ active: currentTheme === 'white' }"
+              (click)="setTheme('white')">
+              White
+            </button>
+          </div>
+
+          <div class="theme-customizer-title" style="margin-top: 1rem;">
+            Particles
+          </div>
+
+          <div class="theme-switcher-buttons">
+            <button
+              type="button"
+              class="theme-switcher-button"
+              [ngClass]="{ active: particlesEnabled }"
+              (click)="setParticles(true)">
+              On
+            </button>
+
+            <button
+              type="button"
+              class="theme-switcher-button"
+              [ngClass]="{ active: !particlesEnabled }"
+              (click)="setParticles(false)">
+              Off
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>

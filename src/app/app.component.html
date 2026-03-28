@@ -1,2 +1,9 @@
-<app-background-particles *ngIf="particles$ | async"></app-background-particles>
+<ng-container *ngIf="particles$ | async">
+
+  <app-background-particles *ngIf="currentTheme !== 'white'"></app-background-particles>
+
+  <app-background-particles-white *ngIf="currentTheme === 'white'"></app-background-particles-white>
+
+</ng-container>
+
 <router-outlet></router-outlet>

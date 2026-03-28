@@ -1,44 +1,34 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
 
-  private PARTICLES = 'PARTICLES';
+  private readonly particlesStorageKey = 'particles-enabled';
 
-  private _particles$: BehaviorSubject<boolean>;
-  public particles$: Observable<boolean>;
+  private readonly particlesSubject = new BehaviorSubject<boolean>(this.getInitialParticlesValue());
+  public particles$ = this.particlesSubject.asObservable();
 
-  constructor() {
-    this._particles$ = new BehaviorSubject<boolean>(this.getParticles());
-    this.particles$ = this._particles$.asObservable().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
+  constructor() {}
+
+  public setParticles(enabled: boolean): void {
+    localStorage.setItem(this.particlesStorageKey, JSON.stringify(enabled));
+    this.particlesSubject.next(enabled);
   }
-
-  private get(key: string): string | null {
-    return localStorage.getItem(key);
-  }
-
-  private set(key: string, value: string) {
-    localStorage.setItem(key, value);
-  }
-
-  private remove(key: string): void {
-    localStorage.removeItem(key);
-  }
-
 
   public getParticles(): boolean {
-    const result = this.get(this.PARTICLES);
-    return result == null || JSON.parse(result)?.particles === true;
+    return this.particlesSubject.value;
   }
 
-  public setParticles(particles: boolean) {
-    this.set(this.PARTICLES, JSON.stringify({ particles }));
-    this._particles$.next(particles);
+  private getInitialParticlesValue(): boolean {
+    const saved = localStorage.getItem(this.particlesStorageKey);
 
+    if (saved === null) {
+      return true;
+    }
+
+    return saved === 'true';
   }
-
-
 }

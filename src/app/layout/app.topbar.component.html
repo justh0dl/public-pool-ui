@@ -1,7 +1,11 @@
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="">
-        <img src="assets/layout/images/logo.svg" alt="logo">
-        <span>Public Pool</span>
+        <img
+          [src]="currentTheme === 'white'
+            ? 'assets/layout/images/qs-sniper-logo-white.png'
+            : 'assets/layout/images/logo.png'"
+          alt="logo">
+        <span>Quantum Sniper Pool</span>
     </a>
 
     <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
