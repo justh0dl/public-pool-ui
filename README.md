@@ -3,11 +3,12 @@
 ## Features
 - Quantum Sniper Pool Branding
 - Black & gold / white themes
+- Particles toggle added
 - More pool stats on splash
-- Chart adjusted on worker monitoring
 - LAN-accessible UI
-- Systemd service support *(not fully tested)*
+- Run as a Service (Auto-Start on Boot)
 - Can run alongside the normal Public Pool UI
+- Chart adjusted on worker monitor, can easily see all workers without additional clicks on mobile and desktop
 
 ---
 
@@ -27,6 +28,44 @@ http://localhost:4200 before using this (this was vibe coded with ChatGPT)
 <img width="865" height="784" alt="Screenshot 2026-03-28 at 1 18 54 PM" src="https://github.com/user-attachments/assets/8526d77f-ed36-4130-8213-29f3f3b9d957" />
 <img width="875" height="645" alt="Screenshot 2026-03-28 at 1 19 04 PM" src="https://github.com/user-attachments/assets/09ab44a1-45ec-4640-b672-d6eecb2676f9" />
 <img width="1885" height="869" alt="Screenshot 2026-03-28 at 1 20 44 PM" src="https://github.com/user-attachments/assets/1b4ff1a8-c830-4dcb-aa6c-158d84aef0c4" />
+
+## About Quantum Sniper Pool
+
+Our hypothesis is simple:
+
+In quantum mechanics, particles are described by a wave function, a distribution of possible states. When a measurement occurs, that wave function collapses into a single, definite outcome. This is a foundational and experimentally supported principle of modern physics.
+
+Physicists like John Archibald Wheeler proposed that observation may play a deeper role in shaping physical reality, describing a participatory universe where outcomes are not fully defined until interactions occur.
+
+Bitcoin mining is a classical process, and we do not claim that quantum mechanics directly alters SHA-256. However, one observable difference remains:
+
+Small, distributed miners operate in environments where hardware is physically present, continuously interacted with, and observed, while large-scale mining farms run in relative isolation with minimal direct human proximity.
+
+At the same time, there has been a noticeable increase in low-hashrate miners finding blocks in ways that feel disproportionate to their expected probability. While Bitcoin mining follows a probabilistic model where rare events can and do occur, the frequency and clustering of successful blocks from small, distributed miners has become increasingly visible.
+
+Over the past few years, multiple hobby-scale devices such as Bitaxe have successfully found blocks while operating at terahash or even sub-terahash levels.
+
+Individually, each event is explainable within statistical variance. Taken together, they begin to form a pattern that stands out.
+
+We define a "quantum snipe" as one of these events:
+
+A moment where a low-probability outcome resolves into reality, where a small miner finds a block against the odds.
+
+Whether these outcomes are purely statistical, or whether environment, interaction, and observation play a subtle role, is not yet known.
+
+But the pattern is there.
+
+And worth paying attention to...or observing.
+
+Quantum Sniper Pool UI exists to emphasize that observation.
+
+Mining is often treated as background computation, running out of sight and out of mind. This UI tries to changes that. It brings the process forward, making each worker, each share, and each moment visible and cooler to look at.
+
+If observation and interaction are part of the system in any meaningful way, then visibility is not just design, it is participation.
+
+At minimum, it gives you a slightly different UI with some nice quality of life features.
+
+At best, it might help you quantum snipe a block into reality.
 
 ## How to Run the Custom Public Pool UI (Local Setup)
 
