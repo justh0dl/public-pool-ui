@@ -79,7 +79,7 @@ Before starting, make sure you have:
 
 ### 📦 Step 1: Download the UI
 
-    git clone https://github.com/justh0dl/public-pool-ui.git
+    git clone https://github.com/justh0dl/public-pool-ui.git custom-public-pool-ui
     cd custom-public-pool-ui
 
 ---
