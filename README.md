@@ -37,7 +37,7 @@ In quantum mechanics, particles are described by a wave function, a distribution
 
 Physicists like John Archibald Wheeler proposed that observation may play a deeper role in shaping physical reality, describing a participatory universe where outcomes are not fully defined until interactions occur.
 
-Bitcoin mining is a classical process, and we do not claim that quantum mechanics directly alters SHA-256. However, one observable difference remains:
+Bitcoin mining is a classical process, and while we do not claim that quantum mechanics directly alters SHA-256, one observable difference remains:
 
 Small, distributed miners operate in environments where hardware is physically present, continuously interacted with, and observed, while large-scale mining farms run in relative isolation with minimal direct human proximity.
 
@@ -47,13 +47,19 @@ Over the past few years, multiple hobby-scale devices such as Bitaxe have succes
 
 Individually, each event is explainable within statistical variance. Taken together, they begin to form a pattern that stands out.
 
+We posit the existence of "The Quantum Snipe"
+
 We define a "quantum snipe" as one of these events:
 
-A moment where a low-probability outcome resolves into reality, where a small miner finds a block against the odds.
+A quantum snipe is a moment where a low-probability action, such as being physically present in the room with, observing, measuring, or otherwise interacting with a mining device, coincides with an outcome collapsing into reality, and a small miner finds a block against the odds.
 
-Whether these outcomes are purely statistical, or whether environment, interaction, and observation play a subtle role, is not yet known.
+Whether these outcomes are purely statistical, or whether environment, interaction, and observation play a subtle role, is not yet known or possible to prove. Or disprove.
 
-But the pattern is there.
+It may look like an anomaly today. But over long time horizons, probability has a way of balancing itself. We do not know the block solvers of the future or if there will be a large cluster of individuals whoe *do not find blocks* while in a peroid where they have high enough hashrates relatative to the network where they statistically and probablistically *should find blocks*. A block found "early" may simply be one that would have otherwise appeared later.
+
+In that sense, a "quantum snipe" feels like pulling a result forward in time, "sniping" a block from the future.
+
+In any case, the pattern is there.
 
 And worth paying attention to...or observing.
 
@@ -66,6 +72,8 @@ If observation and interaction are part of the system in any meaningful way, the
 At minimum, it gives you a slightly different UI with some nice quality of life features.
 
 At best, it might help you quantum snipe a block into reality.
+
+Stare harder, friends.
 
 ## How to Run the Custom Public Pool UI (Local Setup)
 
